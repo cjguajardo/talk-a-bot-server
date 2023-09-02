@@ -64,7 +64,8 @@ export const generateSpeech = async (text: string): Promise<SpeechOutput> => {
   }
 }
 
-const writeStreamToFile = async (stream: AudioStream, filePath: string): Promise<string> => {
+const writeStreamToFile = async (data: SynthesizeSpeechOutput, filePath: string): Promise<string> => {
+  const stream = data.AudioStream as NodeJS.ReadableStream
   return await new Promise((resolve, reject) => {
     const fileStream = fs.createWriteStream(filePath)
     stream.pipe(fileStream)
@@ -88,7 +89,7 @@ export const getBase64Audio = async (audio: SynthesizeSpeechOutput | undefined):
     const randomNumber = Math.floor(Math.random() * 1000000)
     const fileName = CryptoJS.SHA256('audio_' + randomNumber.toString()).toString()
 
-    base64 = await writeStreamToFile(audio.AudioStream, fileName)
+    base64 = await writeStreamToFile(audio, fileName)
     fs.unlinkSync(fileName)
 
     console.log({ base64 })
