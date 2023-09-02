@@ -1,7 +1,7 @@
 
 export const checkKey = (key: string): boolean => {
   // TODO: Implement this function with database lookup
-  if (key === 'CGC-test-456') {
+  if (key === process.env.AUTH_KEY) {
     return true
   }
   return false
