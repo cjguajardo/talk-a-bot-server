@@ -8,7 +8,7 @@
     "test": "jest --coverage",
     "test:watch": "jest --watchAll",
     "build": "npx tsc",
-    "start": "node dist/index.js",
+    "start": "node dist/src/index.js",
     "dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/src/index.js\"",
     "prod": "npx tsc && node dist/src/index.js"
   },
